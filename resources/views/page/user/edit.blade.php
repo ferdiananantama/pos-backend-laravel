@@ -102,7 +102,7 @@
                                             @if ($user->role == 'user') checked @endif>
                                         <span class="selectgroup-button">User</span>
                                     </label>
-
+                        
                                 </div>
                             </div>
                         </div>
