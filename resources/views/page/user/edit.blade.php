@@ -26,9 +26,6 @@
 
             <div class="section-body">
                 <h2 class="section-title">Users</h2>
-
-
-
                 <div class="card">
                     <form action="{{ route('users.update', $user) }}" method="POST">
                         @csrf
@@ -102,7 +99,7 @@
                                             @if ($user->role == 'user') checked @endif>
                                         <span class="selectgroup-button">User</span>
                                     </label>
-                        
+
                                 </div>
                             </div>
                         </div>
