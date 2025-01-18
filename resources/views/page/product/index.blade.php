@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Users')
+@section('title', 'Products')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -11,14 +11,14 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Users</h1>
+                <h1>Product</h1>
                 <div class="section-header-button">
-                    <a href="{{ route('users.create') }}" class="btn btn-primary">Add New</a>
+                    <a href="{{ route('products.create') }}" class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Users</a></div>
-                    <div class="breadcrumb-item">All Users</div>
+                    <div class="breadcrumb-item"><a href="#">Product</a></div>
+                    <div class="breadcrumb-item">All Product</div>
                 </div>
             </div>
             <div class="section-body">
@@ -27,19 +27,15 @@
                         @include('layouts.alert')
                     </div>
                 </div>
-                <h2 class="section-title">Users</h2>
-                <p class="section-lead">
-                    You can manage all Users, such as editing, deleting and more.
-                </p>
                 <div class="row mt-4">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>All Posts</h4>
+                                <h4>All Product</h4>
                             </div>
                             <div class="card-body">
                                 <div class="float-right">
-                                    <form method="GET" action="{{ route('users.index') }}">
+                                    <form method="GET" action="{{ route('products.index') }}">
                                         <div class="input-group">
                                             <input type="text" class="form-control" placeholder="Search" name="name">
                                             <div class="input-group-append">
@@ -56,32 +52,41 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Rule</th>
-                                            <th>Created At</th>
+                                            <th>Category Name</th>
+                                            <th>Price</th>
+                                            <th>Status</th>
+                                            <th>Creat Add</th>
                                             <th class="text-center">Action</th>
                                         </tr>
-                                        @foreach ($users as $user)
+                                        @foreach ($products as $product)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $user->name }}
+                                                <td>
+                                                    {{ $loop->iteration }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->email }}
+                                                    {{ $product->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->role }}
+                                                    {{ $product->category->name }}
                                                 </td>
-                                                <td>{{ $user->created_at }}</td>
+                                                <td>
+                                                    {{ $product->price }}
+                                                </td>
+                                                <td>
+                                                    {{ $product->status == 1 ? 'Active' : 'Inactive' }}
+                                                </td>
+                                                <td>
+                                                    {{ $product->created_at }}
+                                                </td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('users.edit', $user->id) }}'
+                                                        <a href='{{ route('products.edit', $product->id) }}'
                                                             class="btn btn-sm btn-info btn-icon">
                                                             <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
 
-                                                        <form action="{{ route('users.destroy', $user->id) }}"
+                                                        <form action="{{ route('products.destroy', $product->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
@@ -97,7 +102,7 @@
                                     </table>
                                 </div>
                                 <div class="float-right">
-                                    {{ $users->withQueryString()->links() }}
+                                    {{ $products->withQueryString()->links() }}
                                 </div>
                             </div>
                         </div>

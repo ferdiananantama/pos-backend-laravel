@@ -1,10 +1,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="/">ANTDEV</a>
+            <a href="/home">ANTDEV</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            {{-- <a href="index.html">St</a> --}}
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -14,18 +14,14 @@
                     <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
                         <a class="nav-link" href="{{ route('users.index') }}">User</a>
                     </li>
-                    {{-- <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ url('dashboard-ecommerce-dashboard') }}">Ecommerce Dashboard</a>
-                    </li> --}}
+                    <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
+                        <a class="nav-link" href="{{ route('categories.index') }}">Category</a>
+                    </li>
+                    <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
+                        <a class="nav-link" href="{{ route('products.index') }}">Product</a>
+                    </li>
                 </ul>
             </li>
         </ul>
-
-        <!-- <div class="hide-sidebar-mini mt-4 mb-4 p-3">
-            <a href="https://getstisla.com/docs"
-                class="btn btn-primary btn-lg btn-block btn-icon-split">
-                <i class="fas fa-rocket"></i> Documentation
-            </a>
-        </div> -->
     </aside>
 </div>

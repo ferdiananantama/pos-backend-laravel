@@ -9,41 +9,55 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    //get all users
     public function index(Request $request){
         $users = DB::table('users')->when($request -> input('name'), function($query, $name)
         {
             $query->where('name', 'like', '%' .$name. '%')
             ->orwhere('email', 'like', '%'.$name. '%');
         }
-        )->paginate(8);
+        )->paginate(10);
         return view('page.user.index', compact('users'));
     }
 
+    //link to create page
     public function create(){
         return view('page.user.create');
     }
 
 
+    //add new user...
     public function store(Request $request){
-        //add new user...
-        $data = $request->all();
-        $data['password']=Hash::make($request -> input('password'));
-        User::create($data);
-        return redirect() -> route('users.index');
+        $request -> validate([
+        'name' => 'required',
+        'email' => 'required|unique:users',
+        'password' => 'required|min:8',
+        'role' => 'required',
+        ]);
+
+        $user = new User;
+        $user -> name = $request -> name;
+        $user -> email = $request -> email;
+        $user -> password = Hash::make($request -> password);
+        $user -> role = $request -> role;
+        $user -> save();
+
+        return redirect()-> route('users.index')->with('success', 'User berhasil dibuat');
     }
 
+    //link to edit page by id
     public function edit($id){
         $user = User::findOrFail($id);
         return view('page.user.edit', compact('user'));
     }
 
 
+    //update
     public function update(Request $request, $id){
-        //update
         $request -> validate([
             'name' => 'required',
             'email' => 'required',
-            'role' => 'required|in:admin, staff, user',
+            'role' => 'required',
         ]);
 
         //update request
@@ -59,14 +73,15 @@ class UserController extends Controller
             $user -> save();
         }
 
-        return redirect()-> route('users.index')->with('succes', 'User berhasil diedit');
+        return redirect()-> route('users.index')->with('success', 'User berhasil diedit');
     }
 
+    //delete
     public function destroy($id){
         //delete request...
         $users = User::find($id);
         $users->delete();
 
-        return redirect()->route('users.index')->with('succes', 'User berhasil dihapus');
+        return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
     }
 }
