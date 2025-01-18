@@ -4,7 +4,7 @@
             <a href="/home">ANTDEV</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            {{-- <a href="index.html">St</a> --}}
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>

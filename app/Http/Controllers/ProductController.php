@@ -66,6 +66,7 @@ class ProductController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'name' => 'required',
+            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required',

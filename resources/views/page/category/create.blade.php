@@ -29,7 +29,7 @@
 
 
                 <div class="card">
-                    <form action="{{ route('categories.store') }}" method="POST">
+                    <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header">
                             <h4>Input Text</h4>
@@ -60,25 +60,25 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            <div class="form-group mt-4">
-                                <label>Image Category</label>
-                                <div class="col-9">
-                                    <input type="file"
-                                        class="form-control @error('image')
+                                <div class="form-group mt-4">
+                                    <label>Image Category</label>
+                                    <div class="col-9">
+                                        <input type="file" class="form-control"
+                                            @error('image')
                                     is-invalid
-                                    @enderror"
-                                        name="image">
-                                </div>
-                                @error('image')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
+                                    @enderror
+                                            name="image">
                                     </div>
-                                @enderror
+                                    @error('image')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-footer text-right">
-                            <button class="btn btn-primary">Submit</button>
-                        </div>
+                            <div class="card-footer text-right">
+                                <button class="btn btn-primary">Submit</button>
+                            </div>
                     </form>
                 </div>
 
