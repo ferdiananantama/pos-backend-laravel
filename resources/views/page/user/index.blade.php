@@ -54,16 +54,16 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-
+                                            <th>No</th>
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Rule</th>
                                             <th>Created At</th>
-                                            <th>Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                         @foreach ($users as $user)
                                             <tr>
-
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $user->name }}
                                                 </td>
                                                 <td>
@@ -94,8 +94,6 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-
-
                                     </table>
                                 </div>
                                 <div class="float-right">

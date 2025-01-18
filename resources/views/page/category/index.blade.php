@@ -33,7 +33,7 @@
                             <div class="card-header">
                                 <h4>All Category</h4>
                             </div>
-                            <div class="card-body"> 
+                            <div class="card-body">
                                 <div class="float-right">
                                     <form method="GET" action="{{ route('categories.index') }}">
                                         <div class="input-group">
@@ -50,14 +50,18 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
+                                            <th>No</th>
                                             <th>Name</th>
                                             <th>Description</th>
                                             {{-- <th>Image</th> --}}
                                             <th>Creat At</th>
-                                            <th>Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                         @foreach ($categories as $category)
                                             <tr>
+                                                <td>
+                                                    {{ $loop->iteration }}
+                                                </td>
                                                 <td>
                                                     {{ $category->name }}
                                                 </td>
@@ -71,9 +75,10 @@
                                                     {{ $category->created_at }}
                                                 </td>
                                                 <td>
-                                                    <div class="d-flex justify-content-center">
+                                                    <div class="d-flex">
                                                         <a href="{{ route('categories.edit', $category->id) }}"
-                                                            class="btn btn-sm btn-icon btn-info"><i class="far fa-edit"></i>
+                                                            class="btn btn-sm btn-icon btn-info d-flex align-items-center">
+                                                            <i class="far fa-edit"></i>
                                                             Edit
                                                         </a>
                                                         <form action="{{ route('categories.destroy', $category->id) }}"
@@ -81,7 +86,8 @@
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
                                                                 value="{{ csrf_token() }}">
-                                                            <button class="btn btn-icon icon-left btn-danger"><i
+                                                            <button
+                                                                class="btn btn-icon icon-left btn-danger d-flex flex-col align-items-center"><i
                                                                     class="fas fa-times"></i> Delete
                                                             </button>
                                                         </form>

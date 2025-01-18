@@ -33,7 +33,7 @@
                             <div class="card-header">
                                 <h4>All Product</h4>
                             </div>
-                            <div class="card-body"> 
+                            <div class="card-body">
                                 <div class="float-right">
                                     <form method="GET" action="{{ route('products.index') }}">
                                         <div class="input-group">
@@ -50,15 +50,19 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
+                                            <th>No</th>
                                             <th>Name</th>
                                             <th>Category Name</th>
                                             <th>Price</th>
                                             <th>Status</th>
                                             <th>Creat Add</th>
-                                            <th>Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                         @foreach ($products as $product)
                                             <tr>
+                                                <td>
+                                                    {{ $loop->iteration }}
+                                                </td>
                                                 <td>
                                                     {{ $product->name }}
                                                 </td>
@@ -69,24 +73,26 @@
                                                     {{ $product->price }}
                                                 </td>
                                                 <td>
-                                                    {{ $product->status == 1 ? 'Active' : "Inactive" }}
+                                                    {{ $product->status == 1 ? 'Active' : 'Inactive' }}
                                                 </td>
                                                 <td>
                                                     {{ $product->created_at }}
                                                 </td>
                                                 <td>
                                                     <div class="d-flex justify-content-center">
-                                                        <a href="{{ route('products.edit', $product->id) }}"
-                                                            class="btn btn-sm btn-icon btn-info"><i class="far fa-edit"></i>
+                                                        <a href='{{ route('products.edit', $product->id) }}'
+                                                            class="btn btn-sm btn-info btn-icon">
+                                                            <i class="fas fa-edit"></i>
                                                             Edit
                                                         </a>
+
                                                         <form action="{{ route('products.destroy', $product->id) }}"
                                                             method="POST" class="ml-2">
                                                             <input type="hidden" name="_method" value="DELETE" />
                                                             <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}">
-                                                            <button class="btn btn-icon icon-left btn-danger"><i
-                                                                    class="fas fa-times"></i> Delete
+                                                                value="{{ csrf_token() }}" />
+                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
+                                                                <i class="fas fa-times"></i> Delete
                                                             </button>
                                                         </form>
                                                     </div>

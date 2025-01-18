@@ -55,7 +55,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Produk berhasil dibuat');
     }
 
-    //link to page add edit
+    //link to pages add edit
     public function edit($id){
         $product = Product::findOrFail($id);
         $categories = DB::table('categories')->get();
